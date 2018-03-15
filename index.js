@@ -22,6 +22,6 @@ app.use(
   bodyParser.json(),
   graphqlExpress({ schema: myGraphQLSchema })
 );
-app.use("/graphiql", graphiqlExpress({ endpointURL: graphqlEndpointgi}));
+app.use("/graphiql", graphiqlExpress({ endpointURL: graphqlEndpoint }));
 
 app.listen(PORT);
