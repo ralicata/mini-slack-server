@@ -1,29 +1,18 @@
 import Sequelize from "sequelize";
 
-const sequelize = new Sequelize(
-  config.database,
-  config.username,
-  config.password,
-  config
-);
+const sequelize = new Sequelize("slack_clone", "postgres", "postgres");
 
-const models = {};
+const models = {
+  user: sequelize.import("./users"),
+  channel: sequelize.import("./channel"),
+  member: sequelize.import("./member"),
+  team: sequelize.import("./team"),
+  message: sequelize.import("./message")
+};
 
-fs
-  .readdirSync(__dirname)
-  .filter(file => {
-    return (
-      file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
-    );
-  })
-  .forEach(file => {
-    const model = sequelize["import"](path.join(__dirname, file));
-    db[model.name] = model;
-  });
-
-Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
+Object.keys(models).forEach(modelName => {
+  if (models[modelName].associate) {
+    models[modelName].associate(models);
   }
 });
 
