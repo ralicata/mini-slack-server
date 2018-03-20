@@ -34,12 +34,15 @@ app.use(
   graphqlExpress({
     schema: myGraphQLSchema,
     context: {
-      models
+      models,
+      user: {
+        id: 1
+      }
     }
   })
 );
 app.use("/graphiql", graphiqlExpress({ endpointURL: graphqlEndpoint }));
 
-models.sequelize.sync({ force: false }).then(() => {
+models.sequelize.sync({ force: true }).then(() => {
   app.listen(PORT);
 });
