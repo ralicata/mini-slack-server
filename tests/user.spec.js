@@ -1,6 +1,17 @@
 import axios from "axios";
+import models from "../models";
 
-describe("user resolvers", () => {
+const resetUserTable = () => {
+  models.User.destroy({ where: {} }).then(() => {
+    models.sequelize.close();
+  });
+};
+
+describe("User resolvers", () => {
+  afterAll(() => {
+    resetUserTable();
+  });
+
   test("allUsers", async () => {
     const response = await axios.post("http://localhost:3000/graphql", {
       query: `{
@@ -21,7 +32,7 @@ describe("user resolvers", () => {
     });
   });
 
-  test("create user", async () => {
+  test("createUser", async () => {
     const response = await axios.post("http://localhost:3000/graphql", {
       query: `mutation {
         createUser(username: "user1", email: "user1@example.com", password: "password1") {
@@ -36,7 +47,6 @@ describe("user resolvers", () => {
     expect(data).toMatchObject({
       data: {
         createUser: {
-          id: 1,
           username: "user1",
           email: "user1@example.com"
         }

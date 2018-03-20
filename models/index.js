@@ -8,7 +8,8 @@ const sequelize = new Sequelize(
     dialect: "postgres",
     define: {
       underscored: true
-    }
+    },
+    operatorsAliases: false
   }
 );
 
