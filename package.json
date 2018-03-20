@@ -5,14 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --exec babel-node index.js",
+    "test-server":
+      "./reset_test_db.sh; TEST_DB=test_slack_clone babel-node index.js",
     "test": "jest"
   },
-  "keywords": [
-    "slack",
-    "node",
-    "graphql",
-    "apollo"
-  ],
+  "keywords": ["slack", "node", "graphql", "apollo"],
   "author": "Roberto Alicata",
   "license": "MIT",
   "devDependencies": {

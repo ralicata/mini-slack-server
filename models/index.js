@@ -1,11 +1,16 @@
 import Sequelize from "sequelize";
 
-const sequelize = new Sequelize("slack_clone", "postgres", "postgres", {
-  dialect: "postgres",
-  define: {
-    underscored: true
+const sequelize = new Sequelize(
+  process.env.TEST_DB || "slack_clone",
+  "postgres",
+  "postgres",
+  {
+    dialect: "postgres",
+    define: {
+      underscored: true
+    }
   }
-});
+);
 
 const models = {
   User: sequelize.import("./user.js"),
